@@ -1,6 +1,7 @@
 import Image, { type StaticImageData } from "next/image";
 import { ChevronLabel, ViewLink } from "./Links";
 import TransitionLink from "./motion/TransitionLink";
+import { pickForPixelReveal } from "@/lib/pixel";
 import Photo, { type Crop } from "./Photo";
 import styles from "./Works.module.css";
 import workEvermos from "@/public/images/work-evermos.png";
@@ -75,7 +76,7 @@ function WorkCard({ work, reverse }: { work: Work; reverse?: boolean }) {
         sizes={IMAGE_SIZES}
         crop={work.crop}
         className={styles.image}
-        reveal
+        {...(pickForPixelReveal(`home-${work.slug}`) ? { pixelReveal: true } : { reveal: true })}
       />
       <div className={styles.text} data-reveal-text>
         <div className={styles.title}>

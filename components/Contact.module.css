@@ -34,6 +34,8 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  min-width: 0;
+  max-width: 100%;
   font-style: normal;
 }
 
@@ -52,20 +54,19 @@
 }
 
 @media (max-width: 767px) {
+  /* Stack the columns full-width so the fixed 340px lines can't overflow. */
   .info {
     flex-direction: column;
+    align-items: stretch;
     gap: 28px;
-  }
-
-  .socials {
-    display: grid;
-    grid-template-columns: repeat(3, max-content);
-    justify-content: space-between;
   }
 }
 
-@media (max-width: 420px) {
+/* Four links: a tidy 2 × 2 grid on phones. */
+@media (max-width: 639px) {
   .socials {
+    display: grid;
     grid-template-columns: repeat(2, max-content);
+    justify-content: space-between;
   }
 }

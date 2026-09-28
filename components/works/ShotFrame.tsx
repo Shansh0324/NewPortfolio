@@ -1,4 +1,5 @@
 import Image from "next/image";
+import PixelCover from "@/components/motion/PixelCover";
 import type { Shot } from "@/lib/projects";
 import styles from "./ShotFrame.module.css";
 
@@ -9,13 +10,25 @@ type ShotFrameProps = {
   /** object-position for uncropped images. */
   position?: string;
   priority?: boolean;
+  /** Load behind a pixel cover that dissolves once the image is in and in view. */
+  pixelReveal?: boolean;
+  /** Pixel block size for the cover. */
+  pixelCell?: number;
 };
 
 /**
  * One image in a clipped frame. Cropped shots are placed exactly like the
  * design (percentages of the frame); others cover the frame.
  */
-export default function ShotFrame({ shot, sizes, className, position, priority }: ShotFrameProps) {
+export default function ShotFrame({
+  shot,
+  sizes,
+  className,
+  position,
+  priority,
+  pixelReveal,
+  pixelCell = 16,
+}: ShotFrameProps) {
   const { src, alt, crop, bg } = shot;
 
   return (
@@ -47,6 +60,7 @@ export default function ShotFrame({ shot, sizes, className, position, priority }
           style={position ? { objectPosition: position } : undefined}
         />
       )}
+      {pixelReveal && <PixelCover when="view" cell={pixelCell} />}
     </div>
   );
 }

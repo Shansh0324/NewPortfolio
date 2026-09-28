@@ -42,7 +42,7 @@ export default function About() {
       <h2 id="about-title" className="srOnly">
         About
       </h2>
-      <Marquee word="ABOUT" repeat={12} gap={25} className={styles.marquee} />
+      <Marquee word="ABOUT" repeat={12} gap={25} revealOnIntro={1.2} className={styles.marquee} />
 
       <div className={`container ${styles.grid}`}>
         <div className={styles.textWindow} ref={windowRef}>
@@ -75,12 +75,15 @@ export default function About() {
               sizes="(max-width: 767px) 50vw, 380px"
               crop={{ width: 160.92, height: 120.69, left: -16.67, top: -10.34 }}
               className={styles.photoSmall}
+              pixelReveal
             />
             <Photo
               src="/images/photo-login-app.png"
               alt="Phone showing a login screen design"
               sizes="(max-width: 767px) 40vw, 300px"
               className={styles.photoLarge}
+              pixelReveal
+              priority
             />
             <Photo
               src={photoMapApp}
@@ -88,6 +91,7 @@ export default function About() {
               sizes="(max-width: 767px) 50vw, 380px"
               crop={{ width: 158.79, height: 119.1, left: -39.29, top: -17.39 }}
               className={styles.photoSmall}
+              pixelReveal
             />
           </div>
         </div>

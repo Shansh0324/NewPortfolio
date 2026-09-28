@@ -3,6 +3,7 @@
 import { useLenis } from "lenis/react";
 import { useRef } from "react";
 import { gsap, prefersReducedMotion, useGSAP } from "./motion/gsap";
+import PixelCover from "./motion/PixelCover";
 import styles from "./Marquee.module.css";
 
 type MarqueeProps = {
@@ -17,6 +18,11 @@ type MarqueeProps = {
   plain?: boolean;
   /** Seconds for one full loop at rest. */
   duration?: number;
+  /**
+   * For bands visible on first paint: stay hidden under a pixel cover until the
+   * page intro plays, then dissolve after this many seconds.
+   */
+  revealOnIntro?: number;
   className?: string;
 };
 
@@ -31,6 +37,7 @@ export default function Marquee({
   reverse,
   plain,
   duration = 40,
+  revealOnIntro,
   className,
 }: MarqueeProps) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -77,6 +84,7 @@ export default function Marquee({
           </div>
         ))}
       </div>
+      {revealOnIntro !== undefined && <PixelCover when="intro" delay={revealOnIntro} cell={12} duration={1} />}
     </div>
   );
 }

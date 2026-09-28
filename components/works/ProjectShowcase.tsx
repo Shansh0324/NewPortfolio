@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { ViewLink } from "@/components/Links";
 import { gsap, SplitText, useGSAP } from "@/components/motion/gsap";
 import TransitionLink from "@/components/motion/TransitionLink";
+import { pickForPixelReveal } from "@/lib/pixel";
 import { yearLabel, type Project, type Shot } from "@/lib/projects";
 import ProjectCover from "./ProjectCover";
 import ShotFrame from "./ShotFrame";
@@ -13,6 +14,8 @@ import styles from "./ProjectShowcase.module.css";
 const THUMB_SIZES = "(max-width: 767px) 140px, 210px";
 
 type StripProps = {
+  /** Seeds the pseudo-random choice of which thumbnails pixel-dissolve. */
+  seed: string;
   shots: Shot[];
   divider: "short" | "tall";
   /** Stacked projects lead with the divider; split projects end with it. */
@@ -20,7 +23,7 @@ type StripProps = {
   className: string;
 };
 
-function Strip({ shots, divider, dividerFirst, className }: StripProps) {
+function Strip({ seed, shots, divider, dividerFirst, className }: StripProps) {
   const rule = (
     <span className={`${styles.divider} ${styles[divider]}`} aria-hidden="true" data-divider>
       <Image
@@ -37,7 +40,14 @@ function Strip({ shots, divider, dividerFirst, className }: StripProps) {
       <div className={styles.stripTrack} data-strip>
         {dividerFirst && rule}
         {shots.map((shot, i) => (
-          <ShotFrame key={`${shot.src.src}-${i}`} shot={shot} sizes={THUMB_SIZES} className={styles.thumb} />
+          <ShotFrame
+            key={`${shot.src.src}-${i}`}
+            shot={shot}
+            sizes={THUMB_SIZES}
+            className={styles.thumb}
+            pixelReveal={pickForPixelReveal(`${seed}-${i}`, 0.35)}
+            pixelCell={14}
+          />
         ))}
         {!dividerFirst && rule}
       </div>
@@ -55,6 +65,7 @@ export default function ProjectShowcase({ project }: ProjectShowcaseProps) {
   const href = `/works/${project.slug}`;
   const isSplit = project.layout === "split";
   const hasStrips = project.strips.some((s) => s.length > 0);
+  const pixelCover = pickForPixelReveal(`cover-${project.slug}`);
 
   useGSAP(
     () => {
@@ -79,20 +90,27 @@ export default function ProjectShowcase({ project }: ProjectShowcaseProps) {
           .from(desc.lines, { yPercent: 100, duration: 1, stagger: 0.05 }, 0.3)
           .from(q("[data-cta]"), { autoAlpha: 0, y: 20, duration: 0.8 }, 0.6);
 
-        // Cover: panels wipe open from the bottom while the imagery settles from a zoom.
+        // Cover: panels wipe open from the bottom while the imagery settles from a zoom
+        // (unless this cover uses the pixel dissolve instead).
         const coverRoot = q("[data-cover-wrap] > :first-child")[0];
         const panels =
           coverRoot?.dataset.cover === "triptych" ? gsap.utils.toArray(coverRoot.children) : [coverRoot];
-        gsap
-          .timeline({
-            scrollTrigger: { trigger: q("[data-cover-wrap]")[0], start: "top 80%", toggleActions: "play none none reverse" },
-          })
-          .fromTo(
-            panels,
-            { clipPath: "inset(100% 0% 0% 0%)" },
-            { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, ease: "expo.inOut", stagger: 0.12 },
-          )
-          .from(q("[data-cover-wrap] img"), { scale: 1.25, duration: 2, ease: "expo.out" }, 0.3);
+        if (!pixelCover) {
+          gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: q("[data-cover-wrap]")[0],
+                start: "top 80%",
+                toggleActions: "play none none reverse",
+              },
+            })
+            .fromTo(
+              panels,
+              { clipPath: "inset(100% 0% 0% 0%)" },
+              { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, ease: "expo.inOut", stagger: 0.12 },
+            )
+            .from(q("[data-cover-wrap] img"), { scale: 1.25, duration: 2, ease: "expo.out" }, 0.3);
+        }
 
         // Strips drift sideways with the scroll; row two runs the other way.
         q("[data-strip]").forEach((track, i) => {
@@ -172,7 +190,7 @@ export default function ProjectShowcase({ project }: ProjectShowcaseProps) {
       aria-label={`View ${project.name}`}
       data-cover-wrap
     >
-      <ProjectCover cover={project.cover} className={styles.cover} />
+      <ProjectCover cover={project.cover} className={styles.cover} pixelReveal={pixelCover} />
       <span className={styles.coverHint} aria-hidden="true">
         View
       </span>
@@ -207,12 +225,14 @@ export default function ProjectShowcase({ project }: ProjectShowcaseProps) {
       {hasStrips && (
         <div className={styles.strips} data-strips>
           <Strip
+            seed={`${project.slug}-a`}
             shots={project.strips[0]}
             divider="short"
             dividerFirst={!isSplit}
             className={styles.strip1}
           />
           <Strip
+            seed={`${project.slug}-b`}
             shots={project.strips[1]}
             divider="tall"
             dividerFirst={!isSplit}

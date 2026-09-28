@@ -1,15 +1,6 @@
+import { SOCIALS } from "@/lib/site";
 import { ViewLink } from "./Links";
 import styles from "./Contact.module.css";
-
-// Replace the hrefs with Felix's real profiles.
-const SOCIALS = [
-  { label: "Linkedin", href: "https://www.linkedin.com/" },
-  { label: "Dribbble", href: "https://dribbble.com/" },
-  { label: "Behance", href: "https://www.behance.net/" },
-  { label: "Instagram", href: "https://www.instagram.com/" },
-  { label: "Email", href: "mailto:hello@example.com" },
-  { label: "Phone", href: "tel:+620000000000" },
-];
 
 export default function Contact() {
   return (

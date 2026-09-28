@@ -1,4 +1,6 @@
 .testimonial {
+  --featured-w: min(660px, 100vw - 2 * var(--gutter) - 24px);
+  --featured-h: 320px;
   position: relative;
   padding-top: 90px;
   padding-bottom: 60px;
@@ -40,44 +42,93 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  min-height: var(--featured-h);
   padding-inline: var(--gutter);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--gutter);
-  scroll-behavior: smooth;
-  scrollbar-width: none;
+  touch-action: pan-y;
+  user-select: none;
 }
 
-.track::-webkit-scrollbar {
-  display: none;
-}
+/* ---------- Cards: size depends on the slot in the queue ---------- */
 
-.track > li {
+.card {
+  position: relative;
   flex-shrink: 0;
-  scroll-snap-align: start;
+  overflow: hidden;
   border: 2px solid var(--card-border);
-}
-
-.featured {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 32px;
-  width: min(660px, 100%);
-  min-height: 320px;
-  padding: 30px 40px;
   background: var(--black);
 }
 
-.logo svg {
+.pos0 {
+  width: var(--featured-w);
+  height: var(--featured-h);
+}
+
+.pos1 {
+  width: 280px;
+  height: 280px;
+}
+
+.pos2 {
+  width: 240px;
+  height: 240px;
+}
+
+.pos3 {
+  width: 160px;
+  height: 160px;
+}
+
+.posRest {
+  width: 120px;
+  height: 120px;
+}
+
+/* Featured content is laid out at the final featured size, so the growing
+   card reveals it like a mask instead of reflowing it. */
+.featured {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  width: calc(var(--featured-w) - 4px);
+  height: calc(var(--featured-h) - 4px);
+  padding: 30px 40px;
+  visibility: hidden;
+}
+
+.pos0 .featured {
+  visibility: visible;
+}
+
+.logo {
+  height: 62px;
+}
+
+.logoMark svg {
   display: block;
   width: 62px;
   height: 62px;
 }
 
-.logo path {
+.logoMark path {
   stroke: var(--white);
   stroke-width: 0.6;
+}
+
+/* Placeholder mark for clients without a logo asset yet. */
+.monogram {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .quote {
@@ -93,32 +144,46 @@
 
 .body {
   font-size: var(--fs-card);
-  opacity: 0.5;
+  color: var(--white-50); /* colour, not opacity: GSAP animates the opacity */
 }
 
+.author {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--white-50);
+}
+
+/* Tile face: the underlined company name, clickable to bring it forward. */
 .tile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 1;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
   padding: 13px;
   font-size: clamp(22px, 2.083vw, 30px);
   text-align: center;
+  transition:
+    opacity 0.4s ease,
+    background 0.4s ease;
+}
+
+.tile span {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
 
-.lg {
-  width: 280px;
+.tile:hover {
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.md {
-  width: 240px;
-}
-
-.sm {
-  width: 160px;
+.pos3 .tile,
+.posRest .tile {
   font-size: 18.541px;
+}
+
+.pos0 .tile {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .fade {
@@ -128,40 +193,81 @@
   background: linear-gradient(90deg, rgba(0, 0, 0, 0) 46.414%, #000 100%);
 }
 
-.nextWrap {
-  position: absolute;
-  top: 50%;
-  right: var(--gutter);
-  margin-top: -22px;
-  margin-right: -15px;
+/* ---------- Counter, progress, arrows ---------- */
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
-.next {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
+.counter {
+  font-size: var(--fs-body);
+  font-variant-numeric: tabular-nums;
+}
+
+.counterTotal {
+  color: var(--white-50);
+}
+
+.progress {
+  flex: 1;
+  max-width: 320px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.progressFill {
+  display: block;
+  height: 100%;
+  background: var(--white);
+  transform-origin: left;
+  transition: transform 0.95s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.arrows {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.arrow {
+  gap: 0;
+  padding: 8px;
+  border-bottom: 0;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.arrows button:hover .arrow {
+  opacity: 1;
 }
 
 @media (max-width: 639px) {
-  .fade {
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 80%, #000 100%);
+  .testimonial {
+    --featured-h: 380px;
   }
 
   .featured {
-    width: calc(100vw - 2 * var(--gutter) - 24px);
     padding: 24px;
   }
 
-  .lg {
+  .pos1 {
     width: 220px;
+    height: 220px;
   }
 
-  .md {
+  .pos2 {
     width: 190px;
+    height: 190px;
   }
 
-  .sm {
+  .pos3 {
     width: 150px;
+    height: 150px;
+  }
+
+  .fade {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 80%, #000 100%);
   }
 }

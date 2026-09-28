@@ -37,6 +37,7 @@
 
 .group {
   display: flex;
+  align-items: flex-end;
   gap: var(--gap);
   padding-right: var(--gap);
 }
