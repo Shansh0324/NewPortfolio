@@ -1,0 +1,230 @@
+.services {
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 150px;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  min-height: 45px;
+}
+
+/* Top row: intro copy + logo pill */
+.top {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 660px));
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 177px;
+}
+
+.intro p {
+  font-size: var(--fs-body);
+  text-align: justify;
+  opacity: 0.4;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 660 / 180;
+  padding: 3.94% 3.48%;
+  border: 1px solid var(--white);
+  border-radius: 200px;
+}
+
+.logos {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 613 / 116;
+  overflow: hidden;
+}
+
+/* Full-width logo sheet, cropped to its middle band as in the design. */
+.logosImage {
+  position: absolute;
+  left: 0;
+  top: -159.54%;
+  width: 100%;
+  height: 508.74%;
+  max-width: none;
+}
+
+/* Bottom row: three service columns sized off the 96px title (1em). */
+.bottom {
+  --title: clamp(52px, 6.667vw, 96px);
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 85px;
+  font-size: var(--title);
+}
+
+.dashed {
+  position: absolute;
+  left: 50%;
+  width: min(1486px, 100vw + 46px);
+  height: 1px;
+  margin-top: -0.5px;
+  translate: -50% 0;
+  pointer-events: none;
+}
+
+.dashed1 {
+  top: 0.583em;
+}
+
+.dashed2 {
+  top: 4.52em;
+}
+
+.service {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.graphic {
+  width: 4.094em;
+}
+
+.uiux {
+  width: 3.208em;
+}
+
+.serviceHead {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.serviceTitle {
+  font-size: 1em;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.graphic .serviceTitle {
+  line-height: 1;
+}
+
+.serviceMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: var(--fs-body);
+  white-space: nowrap;
+}
+
+.items li {
+  opacity: 0.4;
+}
+
+.collage {
+  position: relative;
+  overflow: clip;
+}
+
+.graphic .collage {
+  width: 100%;
+  aspect-ratio: 393 / 327;
+}
+
+.branding .collage {
+  width: 3.891em;
+  aspect-ratio: 373.5 / 374;
+}
+
+.uiux .collage {
+  width: 100%;
+  aspect-ratio: 308 / 409;
+}
+
+.collageItem {
+  position: absolute;
+  transition: transform 0.35s ease;
+}
+
+.collageItem:hover {
+  z-index: 1;
+  transform: scale(1.04);
+}
+
+.collagePhoto {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 899px) {
+  .top {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .intro {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .services {
+    padding-bottom: 100px;
+  }
+
+  .bottom {
+    --title: clamp(48px, 13vw, 72px);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 64px;
+    margin-top: 56px;
+  }
+
+  .dashed {
+    display: none;
+  }
+
+  .graphic,
+  .uiux {
+    width: 100%;
+  }
+
+  .graphic .collage {
+    width: min(100%, 393px);
+  }
+
+  .branding .collage {
+    width: min(100%, 373.5px);
+  }
+
+  .uiux .collage {
+    width: min(100%, 308px);
+  }
+}

@@ -1,0 +1,132 @@
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --white-50: rgba(255, 255, 255, 0.5);
+  --white-40: rgba(255, 255, 255, 0.4);
+  --white-30: rgba(255, 255, 255, 0.3);
+  --white-20: rgba(255, 255, 255, 0.2);
+  --card-border: rgba(231, 231, 231, 0.5);
+
+  --page-max: 1440px;
+  --gutter: clamp(16px, 3.472vw, 50px);
+
+  /* Type scale (design values at 1440px, scaled down fluidly) */
+  --fs-section-title: clamp(26px, 2.5vw, 36px);
+  --fs-nav: clamp(16px, 1.389vw, 20px);
+  --fs-body: clamp(16px, 1.389vw, 20px);
+  --fs-card: clamp(15px, 1.25vw, 18px);
+  --fs-cta: clamp(17px, 1.528vw, 22px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* Full-bleed look: the native scrollbar is hidden (see ScrollProgress). */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: clip;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  font-weight: 400;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+}
+
+:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 4px;
+}
+
+section[id] {
+  scroll-margin-top: 24px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.sectionTitle {
+  font-size: var(--fs-section-title);
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Faint full-width rule with faded ends (above the contact section). */
+.gradientRule {
+  width: min(100%, 1440px);
+  height: 1px;
+  margin-inline: auto;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 10%,
+    rgba(255, 255, 255, 0.25) 35%,
+    rgba(255, 255, 255, 0.25) 75%,
+    rgba(255, 255, 255, 0) 90%
+  );
+}

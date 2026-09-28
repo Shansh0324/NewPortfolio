@@ -1,0 +1,107 @@
+/* ---------- Filters ---------- */
+
+.filters {
+  padding-block: clamp(100px, 17.36vw, 250px);
+}
+
+.filterInner {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(72px, 12.5vw, 180px);
+}
+
+.applyRow {
+  display: flex;
+  justify-content: center;
+}
+
+.apply {
+  padding: 5px;
+  border-bottom: 1px solid var(--white);
+  font-size: var(--fs-body);
+  transition: letter-spacing 0.35s ease;
+}
+
+.apply:hover {
+  letter-spacing: 0.08em;
+}
+
+/* ---------- Projects ---------- */
+
+.works {
+  padding-top: clamp(40px, 13.9vw, 200px);
+  overflow: clip;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding-block: 120px;
+  text-align: center;
+}
+
+.emptyTitle {
+  font-size: clamp(32px, 3.333vw, 48px);
+  font-weight: 700;
+}
+
+.emptyText {
+  max-width: 460px;
+  font-size: var(--fs-body);
+  color: var(--white-50);
+}
+
+/* ---------- End row: CTAs + giant marquee ---------- */
+
+.end {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-block: clamp(120px, 17.36vw, 250px) clamp(80px, 13.9vw, 200px);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.loadMore:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Clipped to the content width, as in the design. */
+.bigWords {
+  overflow: hidden;
+  opacity: 0.3;
+}
+
+.bigWords .bigMarquee {
+  font-size: clamp(120px, 34.72vw, 500px);
+  font-weight: 700;
+  line-height: 0.964;
+}
+
+@media (max-width: 639px) {
+  .actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

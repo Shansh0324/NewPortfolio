@@ -1,0 +1,31 @@
+/* 613 × 978 portrait frame */
+.tall {
+  width: 100%;
+  aspect-ratio: 613 / 978;
+}
+
+/* Two mockups stacked inside one white frame (the design's mask group). */
+.devices {
+  position: relative;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.layer {
+  position: absolute !important;
+  inset: 0;
+  overflow: visible !important;
+}
+
+/* 339 | 662 | 339 panels across the full 1340 width */
+.triptych {
+  display: grid;
+  grid-template-columns: 339fr 662fr 339fr;
+  width: 100%;
+  aspect-ratio: 1340 / 978;
+}
+
+.center {
+  z-index: 1;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+}

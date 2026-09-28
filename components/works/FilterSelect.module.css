@@ -1,0 +1,142 @@
+.row {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 45px;
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+}
+
+.row:hover,
+.row:focus-within,
+.open,
+.selected {
+  opacity: 1;
+}
+
+.open {
+  z-index: 5;
+}
+
+.label {
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* The underlined trigger fills the rest of the row. */
+.trigger {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+  min-width: 1px;
+  padding-block: 5px;
+  border-bottom: 1px solid var(--white);
+  font-size: var(--fs-body);
+  text-align: right;
+}
+
+.value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trigger:hover .value {
+  opacity: 0.75;
+}
+
+/* ChevronLabel used here only for its icon: drop its own underline/padding. */
+.chevron {
+  gap: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* ---------- Drop-down panel ---------- */
+
+.panel {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  width: 230px;
+  max-width: 70%;
+  background: var(--black);
+  clip-path: inset(0 0 100% 0);
+  visibility: hidden;
+  transition:
+    clip-path 0.55s cubic-bezier(0.76, 0, 0.24, 1),
+    visibility 0s linear 0.55s;
+}
+
+.open .panel {
+  clip-path: inset(0 0 -2px 0);
+  visibility: visible;
+  transition:
+    clip-path 0.55s cubic-bezier(0.76, 0, 0.24, 1),
+    visibility 0s;
+}
+
+.panelHead {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.headLabel {
+  width: 100%;
+  padding-inline: 0;
+  gap: 15px;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding-block: 5px;
+  border-bottom: 1px solid var(--white);
+  font-size: var(--fs-body);
+  text-align: left;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.25s ease;
+}
+
+.open .option {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(0.12s + var(--i) * 0.05s);
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.option[aria-selected="true"] {
+  font-style: italic;
+}
+
+.option:hover {
+  color: var(--white-50);
+}
+
+@media (max-width: 639px) {
+  .row {
+    flex-wrap: wrap;
+    row-gap: 12px;
+  }
+
+  .label {
+    width: 100%;
+  }
+
+  /* The label wraps above the trigger, so pin the panel over the trigger line. */
+  .panel {
+    top: calc(100% - 36px);
+    width: 100%;
+    max-width: none;
+  }
+}

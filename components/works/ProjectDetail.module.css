@@ -1,0 +1,318 @@
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: clamp(100px, 12.5vw, 180px);
+}
+
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: clamp(32px, 5.5vw, 80px);
+}
+
+.counter {
+  font-size: var(--fs-body);
+  color: var(--white-50);
+  font-variant-numeric: tabular-nums;
+}
+
+.title {
+  font-size: clamp(56px, 11.1vw, 160px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.sub {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 15px;
+  font-size: clamp(20px, 2.146vw, 30.902px);
+}
+
+.year {
+  font-style: italic;
+  opacity: 0.5;
+}
+
+.zigzag {
+  position: absolute;
+  left: -5.104%;
+  bottom: calc(min(100vw, 1440px) * -0.02);
+  width: 110.25%;
+  pointer-events: none;
+}
+
+.zigzag svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- Facts (styled like the Works filter rows) ---------- */
+
+.facts {
+  padding-block: clamp(60px, 8.3vw, 120px);
+}
+
+.factList {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(36px, 5vw, 72px);
+}
+
+.fact {
+  display: flex;
+  align-items: flex-end;
+  min-height: 45px;
+}
+
+.factLabel {
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.factValue {
+  flex: 1 1 0;
+  min-width: 1px;
+  padding-block: 5px;
+  border-bottom: 1px solid var(--white);
+  font-size: var(--fs-body);
+  text-align: right;
+}
+
+/* ---------- Overview + cover ---------- */
+
+.overview {
+  padding-block: clamp(60px, 8.3vw, 120px);
+}
+
+.overviewText {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.overviewBody {
+  font-size: clamp(22px, 2.5vw, 36px);
+  line-height: 1.3;
+}
+
+.coverWrap {
+  overflow: hidden;
+}
+
+.overviewSplit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 613px);
+  align-items: end;
+  gap: clamp(30px, 5vw, 72px);
+}
+
+.coverLeft .coverWrap {
+  order: -1;
+}
+
+.coverLeft {
+  grid-template-columns: minmax(0, 613px) minmax(0, 1fr);
+}
+
+.overviewStacked {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+/* ---------- Gallery ---------- */
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding-block: clamp(60px, 8.3vw, 120px);
+}
+
+.galleryHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.galleryItem {
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.galleryItem > * {
+  width: 100%;
+  height: 100%;
+  transition: scale 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.galleryItem:hover > * {
+  scale: 1.05;
+}
+
+/* ---------- Visit ---------- */
+
+.visit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  padding-block: clamp(100px, 12.5vw, 180px);
+  text-align: center;
+}
+
+.visitEyebrow {
+  font-size: var(--fs-body);
+  color: var(--white-50);
+}
+
+/* Rounded pill, echoing the services logo frame. */
+.visitLink {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.2em;
+  padding: 0.55em 1.1em;
+  border: 1px solid var(--white);
+  border-radius: 200px;
+  font-size: clamp(28px, 4.44vw, 64px);
+  font-weight: 700;
+  line-height: 1;
+  transition:
+    background 0.45s ease,
+    color 0.45s ease;
+}
+
+.visitIcon {
+  width: 0.28em;
+  height: auto;
+  transition: filter 0.45s ease;
+}
+
+.visitLink:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+.visitLink:hover .visitIcon {
+  filter: invert(1);
+}
+
+/* ---------- Next project ---------- */
+
+.next {
+  padding-block: clamp(60px, 8.3vw, 120px) clamp(100px, 12.5vw, 180px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.nextLink {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nextLabel {
+  color: var(--white-50);
+}
+
+/* Outlined name that fills with white on hover. */
+.nextName {
+  font-size: clamp(52px, 11.1vw, 160px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--white);
+  background: linear-gradient(var(--white), var(--white)) left / 0% 100% no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: background-size 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.nextLink:hover .nextName,
+.nextLink:focus-visible .nextName {
+  background-size: 100% 100%;
+}
+
+.nextMeta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: var(--fs-body);
+  color: var(--white-50);
+}
+
+.nextChevron {
+  gap: 0;
+  padding: 0;
+  border: 0;
+  transition: translate 0.4s ease;
+}
+
+.nextLink:hover .nextChevron {
+  translate: 8px 0;
+}
+
+@media (hover: none) {
+  .nextName {
+    color: var(--white);
+    -webkit-text-stroke: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .overviewSplit,
+  .coverLeft {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .coverLeft .coverWrap {
+    order: 0;
+  }
+
+  .overviewSplit .coverWrap {
+    max-width: 520px;
+  }
+
+  .galleryGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .fact {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  .factLabel {
+    width: 100%;
+  }
+
+  .factValue {
+    text-align: left;
+  }
+
+  .galleryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+}

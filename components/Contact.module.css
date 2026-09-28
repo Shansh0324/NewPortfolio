@@ -1,0 +1,71 @@
+/* Extra bottom room so the floating back-to-top button never covers the links. */
+.contact {
+  padding-top: 60px;
+  padding-bottom: 140px;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  min-height: 45px;
+}
+
+.info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  font-size: var(--fs-body);
+  color: var(--white-50);
+}
+
+.blurb {
+  width: 340px;
+  max-width: 100%;
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-style: normal;
+}
+
+.addressLine {
+  width: 340px;
+  max-width: 100%;
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px 32px;
+  min-height: 45px;
+}
+
+@media (max-width: 767px) {
+  .info {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .socials {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 420px) {
+  .socials {
+    grid-template-columns: repeat(2, max-content);
+  }
+}

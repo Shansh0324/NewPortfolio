@@ -1,0 +1,174 @@
+.works {
+  container-type: inline-size;
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 120px;
+  overflow: clip;
+}
+
+/* Outlined "WORKS WORKS" lettering behind the cards. */
+.bgWrap {
+  position: absolute;
+  inset: 0;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  pointer-events: none;
+}
+
+.bg {
+  position: absolute;
+  left: -4.778%;
+  top: calc(min(100cqw, 1440px) * 0.3247);
+  width: 115.82%;
+  height: auto;
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.filterLink {
+  display: inline-block;
+}
+
+.filter {
+  gap: 15px;
+  padding-inline: 0;
+}
+
+.rows {
+  width: 100%;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 662px));
+  justify-content: space-between;
+  row-gap: 42px;
+}
+
+/* Card = 320px image + 15px gap + 327px text at the design size. */
+.card {
+  display: grid;
+  grid-template-columns: minmax(0, 320fr) minmax(0, 327fr);
+  column-gap: 15px;
+  align-items: start;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 320 / 482;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: var(--fs-card);
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.title h3 {
+  font-size: inherit;
+  font-weight: 700;
+}
+
+.role {
+  font-weight: 200;
+  font-style: italic;
+}
+
+.desc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.desc p {
+  color: var(--white-50);
+}
+
+/* Bottom row: text on the left (right-aligned), image on the right. */
+.reverse {
+  grid-template-columns: minmax(0, 327fr) minmax(0, 320fr);
+  align-items: end;
+}
+
+.reverse .image {
+  order: 2;
+}
+
+.reverse .text,
+.reverse .desc {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.reverse .title {
+  width: 100%;
+}
+
+.more {
+  font-size: var(--fs-cta);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 1099px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 48px;
+  }
+
+  .rowBottom {
+    margin-top: 48px;
+  }
+
+  .card {
+    max-width: 680px;
+  }
+
+  .reverse {
+    justify-self: end;
+  }
+
+  .bg {
+    top: 38%;
+  }
+}
+
+@media (max-width: 639px) {
+  .card,
+  .reverse {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 20px;
+    max-width: none;
+  }
+
+  .reverse .image {
+    order: 0;
+  }
+
+  .reverse .text,
+  .reverse .desc {
+    align-items: flex-start;
+    text-align: left;
+  }
+}

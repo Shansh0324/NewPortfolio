@@ -1,0 +1,167 @@
+/*
+ * The hero is an illustrated composition, so it is laid out on a fixed design
+ * canvas (1440 units wide on tablet/desktop, 600 units on phones) and scaled with
+ * container query units. 1 unit = var(--u).
+ */
+.hero {
+  container-type: inline-size;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+}
+
+.stage {
+  --u: calc(100cqw / 1440);
+  position: relative;
+  height: calc(755 * var(--u));
+}
+
+.stage > * {
+  position: absolute;
+}
+
+.stage svg {
+  display: block;
+}
+
+.arc {
+  left: calc(-232 * var(--u));
+  top: calc(-221.5 * var(--u));
+  width: calc(1904 * var(--u));
+  height: auto;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.years {
+  left: calc(50 * var(--u));
+  top: calc(118 * var(--u));
+  width: calc(300 * var(--u));
+  height: auto;
+}
+
+.skills {
+  left: calc(641 * var(--u));
+  top: calc(30 * var(--u));
+  width: calc(749 * var(--u));
+  height: auto;
+}
+
+.felix {
+  left: calc(370.5 * var(--u));
+  top: calc(256 * var(--u));
+  width: calc(1016 * var(--u));
+  height: auto;
+}
+
+.halo {
+  left: calc(54 * var(--u));
+  top: calc(60 * var(--u));
+  padding: 0.25em 0.125em;
+  border: calc(3 * var(--u)) solid var(--white);
+  font-size: calc(100 * var(--u));
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.script {
+  font-family: var(--font-script), cursive;
+  font-weight: 400;
+}
+
+.caret {
+  color: var(--white-30);
+  animation: blink 1.1s steps(1) infinite;
+}
+
+.handle {
+  position: absolute;
+  width: 0.22em;
+  height: 0.22em;
+  background: var(--white);
+}
+
+.tl {
+  left: -0.11em;
+  top: -0.11em;
+}
+
+.tr {
+  right: -0.11em;
+  top: -0.11em;
+}
+
+.bl {
+  left: -0.11em;
+  bottom: -0.11em;
+}
+
+.br {
+  right: -0.11em;
+  bottom: -0.11em;
+}
+
+.cursor {
+  left: calc(577.8 * var(--u));
+  top: calc(233 * var(--u));
+  width: calc(48.3443 * var(--u));
+  height: auto;
+  animation: hover 3s ease-in-out infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Uses the individual `translate` property so it composes with GSAP transforms. */
+@keyframes hover {
+  50% {
+    translate: calc(-6 * var(--u)) calc(-4 * var(--u));
+  }
+}
+
+/* Phones: re-compose the illustration vertically on a 600-unit canvas. */
+@media (max-width: 639px) {
+  .stage {
+    --u: calc(100cqw / 600);
+    height: calc(860 * var(--u));
+  }
+
+  .arc {
+    left: calc(-452 * var(--u));
+    top: calc(-120 * var(--u));
+    width: calc(1504 * var(--u));
+  }
+
+  .halo {
+    left: calc(38 * var(--u));
+    top: calc(44 * var(--u));
+  }
+
+  .cursor {
+    left: calc(540 * var(--u));
+    top: calc(222 * var(--u));
+  }
+
+  .years {
+    left: calc(24 * var(--u));
+    top: calc(300 * var(--u));
+    width: calc(210 * var(--u));
+  }
+
+  .skills {
+    left: calc(214 * var(--u));
+    top: calc(270 * var(--u));
+    width: calc(370 * var(--u));
+  }
+
+  .felix {
+    left: calc(10 * var(--u));
+    top: calc(560 * var(--u));
+    width: calc(580 * var(--u));
+  }
+}

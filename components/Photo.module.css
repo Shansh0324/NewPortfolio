@@ -1,0 +1,14 @@
+.frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.cropped {
+  position: absolute;
+  max-width: none;
+}

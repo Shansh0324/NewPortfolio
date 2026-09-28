@@ -1,0 +1,144 @@
+.about {
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 120px;
+  overflow: clip;
+}
+
+.marquee {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  z-index: 2;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 866fr) minmax(0, 464fr);
+  column-gap: 10px;
+}
+
+/* Text column: a fixed-height window, faded top and bottom. */
+.textWindow {
+  position: relative;
+  height: 11.58em;
+  overflow: hidden;
+  font-size: clamp(26px, 3.82vw, 55px);
+}
+
+.textWindow::after,
+.photoWindow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.textWindow::after {
+  background: linear-gradient(180deg, #000 3.6%, rgba(0, 0, 0, 0) 51%, #000 98.3%);
+}
+
+.text {
+  font-weight: 700;
+  line-height: normal;
+  text-align: justify;
+  transform: translateY(-2.29em);
+  will-change: transform;
+}
+
+.dim {
+  color: var(--white-20);
+}
+
+.marker {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 0;
+  translate: -50% 0;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* Photo column */
+.photoWindow {
+  position: relative;
+  height: 11.58em;
+  overflow: hidden;
+  font-size: clamp(26px, 3.82vw, 55px);
+}
+
+.photoWindow::after {
+  background: linear-gradient(180deg, #000 0.9%, rgba(0, 0, 0, 0) 51%, #000 99.2%);
+}
+
+.photos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 63.79%;
+  margin: -14.89% auto 0;
+}
+
+.photoSmall {
+  width: 76.34%;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+
+.photoLarge {
+  width: 100%;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+
+@keyframes bounce {
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@media (max-width: 767px) {
+  .about {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px;
+  }
+
+  .textWindow {
+    height: 14em;
+    font-size: clamp(24px, 6.8vw, 36px);
+  }
+
+  .text {
+    text-align: left;
+  }
+
+  .photoWindow {
+    height: auto;
+    overflow: visible;
+  }
+
+  .photoWindow::after {
+    display: none;
+  }
+
+  .photos {
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+    gap: 10px;
+  }
+
+  .photoSmall {
+    width: 30%;
+  }
+
+  .photoLarge {
+    width: 40%;
+  }
+}

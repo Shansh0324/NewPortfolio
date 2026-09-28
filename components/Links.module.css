@@ -1,0 +1,90 @@
+.view {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  padding-block: 5px;
+  border-bottom: 1px solid var(--white);
+  font-size: var(--fs-cta);
+  line-height: normal;
+  white-space: nowrap;
+  transition: opacity 0.25s ease;
+}
+
+.viewIcon {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.view:hover .viewIcon,
+.view:focus-visible .viewIcon {
+  transform: translate(2px, -2px);
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  border-bottom: 1px solid var(--white);
+  font-size: var(--fs-body);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.arrowIcon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.25s ease;
+}
+
+.arrow:hover .arrowIcon,
+.arrow:focus-visible .arrowIcon {
+  transform: translateX(4px);
+}
+
+.chevronLabel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 5px;
+  border-bottom: 1px solid var(--white);
+  font-size: var(--fs-body);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* Chevron box is 24×13.463 (the 13.463×24 glyph rotated a quarter turn). */
+.chevron {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 24px;
+  height: 13.463px;
+}
+
+.chevron img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  transition: rotate 0.35s ease;
+}
+
+.down img {
+  rotate: 90deg;
+}
+
+.up img {
+  rotate: -90deg;
+}
+
+.right img {
+  rotate: 0deg;
+}
+
+.left img {
+  rotate: 180deg;
+}

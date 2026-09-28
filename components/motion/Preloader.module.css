@@ -1,0 +1,168 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  /* Failsafe: never trap the page behind the loader if scripts fail. */
+  animation: failsafe 0s linear 12s forwards;
+}
+
+@keyframes failsafe {
+  to {
+    visibility: hidden;
+  }
+}
+
+.columns {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.column {
+  flex: 1 1 0;
+  height: 100%;
+  margin-right: -1px; /* hide sub-pixel seams between columns */
+  background: var(--black);
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* Design-tool selection box, echoing the hero's "Halo, I'm" frame. */
+.box {
+  position: relative;
+  padding: clamp(22px, 3vw, 36px) clamp(30px, 4vw, 48px);
+}
+
+.edgeH,
+.edgeV {
+  position: absolute;
+  background: var(--white);
+}
+
+.edgeH {
+  left: 0;
+  right: 0;
+  height: 2px;
+}
+
+.edgeV {
+  top: 0;
+  bottom: 0;
+  width: 2px;
+}
+
+.top {
+  top: 0;
+  transform-origin: left;
+}
+
+.bottom {
+  bottom: 0;
+  transform-origin: right;
+}
+
+.left {
+  left: 0;
+  transform-origin: bottom;
+}
+
+.right {
+  right: 0;
+  transform-origin: top;
+}
+
+.handle {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--white);
+}
+
+.tl {
+  left: -6px;
+  top: -6px;
+}
+
+.tr {
+  right: -6px;
+  top: -6px;
+}
+
+.bl {
+  left: -6px;
+  bottom: -6px;
+}
+
+.br {
+  right: -6px;
+  bottom: -6px;
+}
+
+.mark svg {
+  display: block;
+  width: clamp(120px, 16vw, 200px);
+  height: auto;
+}
+
+.mark path {
+  fill: var(--white);
+  stroke: var(--white);
+  stroke-width: 0.3;
+}
+
+.tagline {
+  font-size: clamp(16px, 1.6vw, 22px);
+  letter-spacing: 0.3em;
+  color: var(--white-50);
+  white-space: nowrap;
+}
+
+.footer {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: calc(var(--gutter) + 18px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  font-size: var(--fs-body);
+  color: var(--white-50);
+}
+
+.meta {
+  display: block;
+}
+
+.count {
+  font-size: clamp(56px, 9vw, 128px);
+  font-weight: 700;
+  line-height: 0.8;
+  color: var(--white);
+  font-variant-numeric: tabular-nums;
+}
+
+.bar {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: var(--gutter);
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.barFill {
+  display: block;
+  height: 100%;
+  background: var(--white);
+  transform: scaleX(0);
+  transform-origin: left;
+}

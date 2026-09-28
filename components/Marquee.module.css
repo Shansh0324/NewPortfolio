@@ -1,0 +1,51 @@
+.band {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-block: 5px;
+  font-size: var(--fs-section-title);
+  line-height: normal;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* The top/bottom rules only span the content width, the text runs edge to edge. */
+.band::before,
+.band::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: min(100% - 2 * var(--gutter), 1316px);
+  height: 1px;
+  background: var(--white);
+  transform: translateX(-50%);
+}
+
+.band::before {
+  top: 0;
+}
+
+.band::after {
+  bottom: 0;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.group {
+  display: flex;
+  gap: var(--gap);
+  padding-right: var(--gap);
+}
+
+.plain {
+  padding-block: 0;
+}
+
+.plain::before,
+.plain::after {
+  display: none;
+}
